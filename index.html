@@ -1,0 +1,84 @@
+<!-- 
+    referensi https://youtube.com/shorts/v8g4e5nJLvE?si=8ZgoMAQEGT305IJP
+    js sudah memiliki template sendiri sebelum memulai ets
+ -->
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ETS Pemrogramman Web 2023</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    </head>
+    <body class="">
+    <!-- Kerjakan dibawah sini -->
+    <div class="container py-5">
+         <div class="row" id="card-container">
+         </div>
+    </div>
+<!-- 
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card shadow p-4 bg-white">
+                    <div class="card-body">
+                        <h5 class="card-title" id="titleYear"></h5>
+                        <p class="card-text" id="author"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div> -->
+ 
+     <!-- JavaScript -->
+     <script>
+        fetch('https://it-its.id/api/books')
+        .then(result => {
+            return result.json()
+        }).then(data => {
+            data.forEach((book, index) => {
+                if (index % 3 === 0) {
+                    var newRow = document.createElement('div');
+                    newRow.className = 'row';
+ 
+                    document.getElementById('card-container').appendChild(newRow);
+                }
+ 
+                var colDiv = document.createElement('div');
+                colDiv.className = 'col-lg-4 col-md-6 col-sm-12 py-2';
+ 
+                var cardDiv = document.createElement('div');
+                cardDiv.className = 'card shadow p-4 bg-white';
+ 
+                var cardBody = document.createElement('div');
+                cardBody.className = 'card-body';
+ 
+                var titleYear = document.createElement('h5');
+                titleYear.className = 'card-title';
+                titleYear.textContent = (book.title + ` (${book.year})`);
+ 
+                var author = document.createElement('p');
+                author.className = 'card-text';
+                author.textContent = `${book.author}`;
+ 
+                cardBody.appendChild(titleYear);
+                cardBody.appendChild(author);
+ 
+                cardDiv.appendChild(cardBody);
+                colDiv.appendChild(cardDiv);
+ 
+                if (index % 3 === 0) {
+                    newRow.appendChild(colDiv);
+                } else {
+                    document.getElementById('card-container').lastChild.appendChild(colDiv);
+                }
+            });
+        }).catch(error => {
+             console.log(error);
+        });
+    </script>
+    <!-- Kerjakan diatas ini -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    </body>
+</html>
+ 
